@@ -40,7 +40,7 @@ object Neo4JPlugin extends Plugin{
     println("Graph DB created")
 
     val config = new ServerConfigurator(graphdb)
-    config.configuration().setProperty(Configurator.WEBSERVER_PORT_PROPERTY_KEY, 1007474 )
+    config.configuration().setProperty(Configurator.WEBSERVER_PORT_PROPERTY_KEY, 17474 )
     val neo4JServer = new WrappingNeoServerBootstrapper(graphdb, config)
     println("Neo4j Server created")
 
