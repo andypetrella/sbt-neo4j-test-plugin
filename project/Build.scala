@@ -8,21 +8,23 @@ object ThisBuild extends Build {
   lazy val buildVersion =  "0.0.1" + SNAPSHOT
 
   val neo4jVersion                  = "1.9.M03"
-  lazy val neo4j                    = "org.neo4j.app" % "neo4j-server" % neo4jVersion classifier "static-web" classifier ""
-  lazy val neo4jTests               = "org.neo4j.app" % "neo4j-server" % neo4jVersion classifier "tests" classifier ""
+  lazy val neo4jServer              = "org.neo4j.app" % "neo4j-server" % neo4jVersion classifier "static-web"  classifier "tests" classifier ""
   lazy val neo4jkernel              = "org.neo4j" % "neo4j-kernel" % neo4jVersion  classifier "tests" classifier ""
   lazy val jerseyForNeo4J           = "com.sun.jersey" % "jersey-core" % "1.9"
 
   val libDependencies = Seq(
-    neo4j,
-    neo4jTests,
+    neo4jServer,
     neo4jkernel,
     jerseyForNeo4J
   )
 
 
   lazy val root = {
-    Project(id = "sbt-neo4j-test-plugin", base = file("."), settings = Project.defaultSettings).settings(
+    Project(
+      id = "sbt-neo4j-test-plugin",
+      base = file("."),
+      settings = Project.defaultSettings ++ net.virtualvoid.sbt.graph.Plugin.graphSettings
+    ).settings(
       scalaVersion := "2.10.0",
       sbtPlugin := true,
       version := buildVersion,

@@ -1,21 +1,14 @@
 package be.nextlab.sbt.neo4j
 
-import java.io.File
 import sbt._
 import Keys._
 
-import org.neo4j.graphdb.GraphDatabaseService
-import org.neo4j.test.TestGraphDatabaseFactory
-import org.neo4j.graphdb.factory.GraphDatabaseFactory
-import org.neo4j.graphdb.factory.GraphDatabaseSetting
 import org.neo4j.kernel.GraphDatabaseAPI
 import org.neo4j.server.ServerTestUtils
 import org.neo4j.server.Bootstrapper
 import org.neo4j.server.WrappingNeoServerBootstrapper
 import org.neo4j.server.configuration.Configurator
 import org.neo4j.server.configuration.ServerConfigurator
-import org.neo4j.shell.ShellSettings
-import org.neo4j.shell.ShellLobby
 
 //import scalax.file._
 
@@ -32,9 +25,6 @@ object Neo4JPlugin extends Plugin{
 
   def start() {
     val props:java.util.Map[String, String] = new java.util.HashMap[String, String]
-    //props.put(
-    //  ShellSettings.remote_shell_enabled.name, GraphDatabaseSetting.TRUE
-    //)
     val graphdb = ServerTestUtils.EPHEMERAL_GRAPH_DATABASE_FACTORY.createDatabase(null, props)
 
     println("Graph DB created")
